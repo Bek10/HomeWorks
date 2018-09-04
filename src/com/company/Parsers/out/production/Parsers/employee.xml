@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<employees>
+    <employee id="111">
+        <firstName>Ivan</firstName>
+        <lastName>Ivanov</lastName>
+        <location>Astana</location>
+    </employee>
+    <employee id="112">
+        <firstName>Vasya</firstName>
+        <lastName>Sidorov</lastName>
+        <location>Karaganda</location>
+    </employee>
+    <employee id="113">
+        <firstName>Petya</firstName>
+        <lastName>Petrov</lastName>
+        <location>Almaty</location>
+    </employee>
+</employees>
