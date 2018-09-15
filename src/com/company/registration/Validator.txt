@@ -1,0 +1,23 @@
+package Service;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Validator {
+    public static boolean check(String login) {
+        if (!login.isEmpty()) {
+            Pattern pattern = Pattern.compile("^[A-Za-z]{1,18}([._-]{1,2})?[A-Za-z0-9]{1,18}$");
+            Matcher matcher = pattern.matcher(login);
+            if (matcher.find()){
+                return true;
+            }
+        else {
+                return false;
+            }
+        }
+        else {
+                return false;
+        }
+    }
+}
+
