@@ -1,0 +1,37 @@
+import Factory.Action;
+import Service.*;
+import Service.Error;
+
+import javax.servlet.http.HttpServletRequest;
+
+public class ServiceUri implements Factory.ActionFactory {
+
+    @Override
+    public Action getAction(HttpServletRequest request) {
+
+        if (request.getRequestURI().equals("/Category"))   {
+           return new ShowCategory();
+        }
+        if (request.getRequestURI().equals("/ShowGoods"))   {
+            return new ShowGoods();
+        }
+        if (request.getRequestURI().equals("/Registration"))   {
+            return new Registration();
+        }
+        if (request.getRequestURI().equals("/AddBasket"))   {
+            return new ShowCategory();
+        }
+
+        if (request.getRequestURI().equals("/view/Autorisation"))   {
+            return new Autorization();
+        }
+
+        if (request.getRequestURI().equals("/Basket"))   {
+            return new Basket();
+        }
+        else {
+            return new Error();
+        }
+    }
+}
+

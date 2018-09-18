@@ -1,0 +1,40 @@
+package Service;
+
+import DAO.UserDAO;
+import Entity.User;
+import Factory.Action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
+
+public class Autorization implements Action {
+    private final int FALSE_ROLE=-1;
+    private User check(String login,String password) throws SQLException, ClassNotFoundException {
+        UserDAO userDAO=new UserDAO();
+        User user=new User();
+        for(User checkUser:userDAO.getAllUsers()){
+            if (login.equals(checkUser.getUserLogin()) && password.equals(checkUser.getUserPassword())){
+                user.setUserRole(checkUser.getUserRole());
+          break;
+            }
+        user.setUserRole(FALSE_ROLE);
+        }
+    return user;
+    }
+    @Override
+    public String execute(HttpServletRequest request) throws SQLException, ClassNotFoundException {
+       User user = check(request.getParameter("login"),request.getParameter("password"));
+        System.out.println(user.getUserRole());
+       HttpSession httpSession=request.getSession();
+       if ( user.getUserRole()==FALSE_ROLE) {
+           req.setAttribute("AutorizationError","Такого Логина не существует");
+           return "/view/Error.jsp";
+       }
+    else {
+        httpSession.setAttribute("user",user);
+        return "/view/Succes.jsp";
+       }
+    }
+}
+

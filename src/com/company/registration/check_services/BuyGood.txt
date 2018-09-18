@@ -1,0 +1,42 @@
+package Service;
+
+import Entity.User;
+import Factory.Action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
+
+public class Basket implements Action {
+    private final int USER_ROLE=1;
+    private final int ADMIN_ROLE=0;
+    private boolean checkRole(int userRole){
+        boolean check;
+     switch (userRole){
+         case USER_ROLE:
+             check=true;
+             break;
+         case ADMIN_ROLE:
+             check=true;
+         default:
+             check=false;
+     }
+    return check;
+    }
+    @Override
+    public String execute(HttpServletRequest request) throws SQLException, ClassNotFoundException {
+        HttpSession httpSession=request.getSession();
+       User user= (User) httpSession.getAttribute("user");
+      if (user==null){
+          request.setAttribute("Login","Вы не авторизовались!");
+          return "/view/Autorization.jsp";
+      }
+       if (checkRole(user.getUserRole())){
+           return "/view/Basket.jsp";
+       }
+    else {
+        return "/view/Error.jsp";
+       }
+    }
+}
+
